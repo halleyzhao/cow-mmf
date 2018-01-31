@@ -1,0 +1,4 @@
+1 source mm-setenv
+2 ./update_mdk.sh
+yunos-mdk.tgz is generated, it can be installed on another PC for development
+

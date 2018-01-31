@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!--
+Copyright (C) 2017 Alibaba Group Holding Limited. All Rights Reserved.
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!--  low=0,normal=256,HIGH=512  -->
+<Components>
+    <Path libpath="/usr/lib/cow/"/>
+    <Component libComponentName="MediaCodecComponent" ComponentName="MediaCodec">
+        <mime MimeType="video/x-vnd.on2.vp8" Priority="normal" Cap="decoder"/>
+        <mime MimeType="video/x-vnd.on2.vp9" Priority="normal" Cap="decoder"/>
+        <mime MimeType="video/avc" Priority="normal" Cap="codec"/>
+        <mime MimeType="video/hevc" Priority="normal" Cap="decoder"/>
+        <mime MimeType="video/mp4v-es" Priority="normal" Cap="decoder"/>
+        <mime MimeType="video/3gpp" Priority="normal" Cap="decoder"/>
+        <mime MimeType="video/mpeg2" Priority="normal" Cap="decoder"/>
+    </Component>
+    <Component libComponentName="FFmpegComponent" ComponentName="FFmpeg">
+        <mime MimeType="video/avc" Priority="low" Cap="decoder"/>
+        <mime MimeType="video/hevc" Priority="low" Cap="decoder"/>
+        <mime MimeType="video/wmv" Priority="low" Cap="decoder"/>
+        <mime MimeType="video/wmv1" Priority="low" Cap="decoder"/>
+        <mime MimeType="video/wmv2" Priority="low" Cap="decoder"/>
+        <mime MimeType="video/wmv3" Priority="low" Cap="decoder"/>
+        <mime MimeType="video/asf" Priority="low" Cap="decoder"/>
+        <mime MimeType="video/mp4v-es" Priority="low" Cap="decoder"/>
+        <mime MimeType="video/mp4v-es-v1" Priority="low" Cap="decoder"/>
+        <mime MimeType="video/mp4v-es-v2" Priority="low" Cap="decoder"/>
+        <mime MimeType="video/mp4v-es-v3" Priority="low" Cap="decoder"/>
+        <mime MimeType="video/mp4v-es" Priority="low" Cap="encoder"/>
+        <mime MimeType="video/mp4v-es-v1" Priority="low" Cap="encoder"/>
+        <mime MimeType="video/mp4v-es-v2" Priority="low" Cap="encoder"/>
+        <mime MimeType="video/mp4v-es-v3" Priority="low" Cap="encoder"/>
+        <mime MimeType="video/mpegvideo" Priority="low" Cap="decoder"/>
+        <mime MimeType="video/vc1" Priority="low" Cap="decoder"/>
+    </Component>
+</Components>

@@ -1,0 +1,39 @@
+#################################
+# usage:
+# Write your makefile from multimedia's "src" directory, i.e. base/...
+# Use "#" for comment
+# Mind the order, because will compile in the order.
+
+#####################################
+# audio
+# audio manager
+#audio/src/audiomanager/build/am.mk
+#audio/src/audiomanager/build/afm.mk
+#audio/src/audiomanager/build/afm-test.mk
+
+# pulseaudio
+#audio/src/pulseaudio/modules/build/audiotrack_sink.mk
+#audio/src/pulseaudio/modules/build/audiotrack_source.mk
+#audio/src/pulseaudio/test/build/simple_test.mk
+#audio/src/pulseaudio/test/build/async_test.mk
+#audio/src/pulseaudio/test/build/dts_pa_test.mk
+#audio/src/pulseaudio/test/build/patest.mk
+
+# PCMRecorder
+#audio/src/PCMRecorder/build/pcmr.mk
+#audio/src/PCMRecorder/build/pcmrt.mk
+
+# audio decode
+#audio/src/audiodecode/build/audiodecode.mk
+#audio/src/audiodecode/build/audiodecodetest.mk
+
+# PCMPlayer
+#audio/src/PCMPlayer/build/pcmp.mk
+#audio/src/PCMPlayer/build/pcmpt.mk
+
+###########################
+# mediaplayer
+mediaplayer/build/mp.mk
+#mediaplayer/build/mptest.mk
+#mediaplayer/build/compatplayertest.mk
+

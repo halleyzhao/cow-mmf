@@ -1,0 +1,6 @@
+# export SUB_USER="yanlan.zy"
+export INSTALL_DIR="local_install"
+export MY_HOME="${HOME}/${SUB_USER}"
+# git clone dev-65:git-repos/ubt-bin ${MY_HOME}/bin
+export PATH="${MY_HOME}/bin:${PATH}"
+export DEFAULT_LOCAL_INSTALL_DIR="${MY_HOME}/${INSTALL_DIR}"

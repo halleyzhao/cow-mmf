@@ -1,0 +1,37 @@
+#################################
+# usage:
+# Write your makefile from multimedia's "src" directory, i.e. base/...
+# Use "#" for comment
+# Mind the order, because will compile in the order.
+
+###########################
+# audio
+#audio/src/audiosystem/build/as.mk
+#audio/src/audiosystem/build/as-p-test.mk
+#audio/src/audiosystem/build/as-h-test.mk
+#audio/src/audiosystem/build/as-test.mk
+#audio/src/audiosystem/build/as-command.mk
+#audio/src/audiomanager/build/am.mk
+#audio/src/audiomanager/build/afm.mk
+#audio/src/audiomanager/build/afm-test.mk
+#audio/src/audiohw/build/ah.mk
+#audio/src/pulseaudio/modules/build/yunos_sink.mk
+#audio/src/pulseaudio/modules/build/audiotrack_source.mk
+#audio/src/pulseaudio/test/build/simple_test.mk
+#audio/src/pulseaudio/test/build/async_test.mk
+#audio/src/pulseaudio/test/build/dts_pa_test.mk
+#audio/src/pulseaudio/test/build/patest.mk
+#audio/src/pulseaudio/modules/build/audiotrack_sink.mk
+#audio/src/PCMRecorder/build/pcmr.mk
+#audio/src/PCMRecorder/build/pcmrt.mk
+#audio/src/PCMPlayer/build/pcmp.mk
+#audio/src/PCMPlayer/build/pcmpt.mk
+#audio/src/audiodecode/build/audiodecode.mk
+#audio/src/audiodecode/build/audiodecodetest.mk
+
+###########################
+# mediaplayer
+mediaplayer/build/mp.mk
+#mediaplayer/build/mptest.mk
+#mediaplayer/build/compatplayertest.mk
+

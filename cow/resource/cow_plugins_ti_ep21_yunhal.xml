@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!--
+Copyright (C) 2017 Alibaba Group Holding Limited. All Rights Reserved.
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!--  low=0,normal=256,HIGH=512  -->
+<Components>
+    <Path libpath="/usr/lib/cow/"/>
+    <Component libComponentName="VideoDecodeDucati" ComponentName="VideoDecodeDucati">
+        <mime MimeType="video/avc" Priority="low" Cap="decoder"/>
+    </Component>
+    <Component libComponentName="VideoSinkWayland" ComponentName="VideoSinkWayland">
+        <mime MimeType="video/render" Priority="low" Cap="generic"/>
+    </Component>
+    <Component libComponentName="AudioSinkPulse" ComponentName="AudioSinkPulse">
+        <mime MimeType="audio/render" Priority="high" Cap="generic"/>
+    </Component>
+    <Component libComponentName="AudioSrcPulse" ComponentName="AudioSrcPulse">
+        <mime MimeType="audio/source" Priority="high" Cap="generic"/>
+    </Component>
+    <Component libComponentName="ExternalCaptureSource" ComponentName="ExternalCaptureSource">
+        <mime MimeType="source/external" Priority="high" Cap="generic"/>
+    </Component>
+    <Component libComponentName="VideoEncodeV4l2" ComponentName="VideoEncodeV4l2">
+        <mime MimeType="video/avc" Priority="high" Cap="encoder"/>
+    </Component>
+    <Component libComponentName="VideoDecodeV4l2" ComponentName="VideoDecodeV4l2">
+        <mime MimeType="video/avc" Priority="high" Cap="decoder"/>
+        <mime MimeType="video/mp4v-es" Priority="high" Cap="decoder"/>
+        <mime MimeType="video/vc1" Priority="high" Cap="decoder"/>
+        <mime MimeType="video/mpeg2" Priority="high" Cap="decoder"/>
+    </Component>
+</Components>
+

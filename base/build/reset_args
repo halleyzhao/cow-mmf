@@ -1,0 +1,73 @@
+#MM_DEFINES := -D_YUNOS_MM -DMM_LOG_OUTPUT_E -DMM_LOG_OUTPUT_W -DMM_LOG_OUTPUT_I -DMM_LOG_OUTPUT_D -DMM_LOG -DUSE_LOGCAT #-DMM_LOG_OUTPUT_V
+COW_PLUGIN_PATH:=${LOCAL_INSTALL_DIR}/usr/lib/cow/
+LOCAL_DEFINES:=-D_YUNOS_MM -DMM_LOG_LEVEL=MM_LOG_DEBUG              \
+              -D_COW_SOURCE_VERSION=\"0.0.5:20151128\"              \
+              -D__MM_NATIVE_BUILD__                                 \
+              -D__DISABLE_AUDIO_STREAM__                           \
+              -D_COW_PLUGIN_PATH=\"$(COW_PLUGIN_PATH)\"             \
+              -D_COWPLAYER_PLUGIN_PATH=\"$(COW_PLUGIN_PATH)\"       \
+              -D_COW_XML_PATH=\"$(COW_PLUGIN_PATH)\"                \
+              -D_VIDEO_CODEC_FFMPEG                                 \
+              -D_ENABLE_EGL                                         \
+              -D_ENABLE_X11                                         \
+              -Wall -Wno-multichar                                  \
+              -fpermissive                                          \
+              -fPIC -g
+
+MM_DEFINES += $(LOCAL_DEFINES)
+
+MULTIMEDIA_BASE_INCLUDE :=$(MULTIMEDIA_BASE)/base/include
+
+MM_INCLUDE := . \
+              ../include                           \
+              ../include/multimedia                \
+              $(MULTIMEDIA_BASE_INCLUDE)           \
+              $(MULTIMEDIA_BASE_INCLUDE)/multimedia
+MM_MEDIACODEC_INCLUDE := $(BASE_BUILD_DIR)/../../mediacodec/src
+MM_HELP_WINDOWSURFACE_INCLUDE := $(BASE_BUILD_DIR)/../../ext
+
+
+ifneq ($(MM_MODULE_BUILD_PATH),)
+    OUT_BASE_PATH := $(MM_MODULE_BUILD_PATH)/out
+else
+    OUT_BASE_PATH := $(BASE_BUILD_DIR)/out
+endif
+OUT_DEST_PATH := $(OUT_BASE_PATH)/rootfs
+OUT_RELATIVE_LIB_PATH := usr/lib
+OUT_LIB_PATH := $(OUT_DEST_PATH)/$(OUT_RELATIVE_LIB_PATH)
+OUT_RELATIVE_BIN_PATH := usr/bin
+OUT_BIN_PATH := $(OUT_DEST_PATH)/$(OUT_RELATIVE_BIN_PATH)
+OUT_ENG_ONLY_FILE := $(OUT_BASE_PATH)/eng_only.txt
+
+INST_BASE_PATH := $(LOCAL_INSTALL_DIR)
+INST_LIB_PATH := usr/lib
+INST_BIN_PATH := usr/bin
+INST_INCLUDE_PATH = usr/include/multimedia
+INST_TEST_RES_PATH = usr/bin/ut/res
+INST_ETC_PATH = etc
+COW_TEST_RES_PATH=${LOCAL_INSTALL_DIR}/usr/bin/ut/res
+
+#########################################
+# The folloing can be used by users:
+LOCAL_SRC_FILES :=
+#LOCAL_DEFINES :=
+LOCAL_INCLUDES :=
+
+LOCAL_SHARED_LIBRARIES :=
+LOCAL_STATIC_LIBRARIES :=
+LOCAL_LIB_PATHS :=
+LOCAL_RPATH :=
+LOCAL_MODULE :=
+
+LOCAL_INST_FILES :=
+LOCAL_INSTALL_PATH :=
+
+###
+LOCAL_CFLAGS :=
+LOCAL_CPPFLAGS :=
+LOCAL_LDFLAGS :=
+GLIB_G_OPTION_LDFLAGS:=`pkg-config --libs glib-2.0`
+GLIB_G_OPTION_CFLAGS:=`pkg-config --cflags glib-2.0`
+
+## set default param
+LOCAL_CPPFLAGS += "-std=c++11"

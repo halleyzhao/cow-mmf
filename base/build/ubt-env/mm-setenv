@@ -1,0 +1,33 @@
+#!/bin/sh
+if [ "$0" = "bash" ];then
+    MY_SCRIPT="$BASH_SOURCE"
+else
+    MY_SCRIPT="$0"
+fi
+SCRIPTS_PATH=$(cd `dirname $MY_SCRIPT`; pwd)
+echo "using scripts from ${SCRIPTS_PATH}"
+source ${SCRIPTS_PATH}/set_default_install_dir
+
+## use customize ffmpeg by default
+source ${SCRIPTS_PATH}/ffmpeg-setenv
+
+## default off for yami
+## source ${SCRIPTS_PATH}/yami-setenv "${LOCAL_INSTALL_DIR}/yami"
+
+if [ -n "$1" ]; then
+    export LOCAL_INSTALL_DIR=$1
+else
+    export LOCAL_INSTALL_DIR="${DEFAULT_LOCAL_INSTALL_DIR}"
+fi
+
+export COW_INSTALL_DIR="${LOCAL_INSTALL_DIR}/multimedia/"
+export PATH="${COW_INSTALL_DIR}/usr/bin:"${PATH}
+export LD_LIBRARY_PATH="${COW_INSTALL_DIR}/usr/lib:"${LD_LIBRARY_PATH}
+source ${SCRIPTS_PATH}/add_term_prompt.sh cow_ffmpeg
+
+echo "*======================current configuration============================="
+echo "* COW_INSTALL_DIR: ${COW_INSTALL_DIR}"
+echo "* LD_LIBRARY_PATH: ${LD_LIBRARY_PATH}"
+echo "* PATH           : $PATH"
+echo "*========================================================================="
+

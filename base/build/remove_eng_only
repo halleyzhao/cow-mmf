@@ -1,0 +1,27 @@
+#!/bin/bash
+
+image_base=$1;
+build_path=$2;
+list_file=${build_path}/out/eng_only.txt;
+if [ ! -e ${image_base} ]; then
+    echo ${image_base} "not exists";
+    exit 0;
+fi
+
+if [ ! -e ${list_file} ]; then
+    echo ${list_file} "not exists";
+    exit 0;
+fi
+
+#for file in `ls ${list_file_path}`
+#do
+#    abs=${list_file_path}/${file};
+    while read line
+    do
+        if [ "${line}"x != ""x ]; then
+            rm -f ${image_base}/${line};
+        fi
+    done < ${list_file}
+#done
+
+exit 0;

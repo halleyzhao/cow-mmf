@@ -1,0 +1,46 @@
+#!/bin/bash
+
+MAKEFILE="Makefile";
+modules_file=$1;
+
+if [ "${modules_file}"x = ""x ]; then
+    echo "module file not provided, use the default";
+    modules_file="modules";
+fi
+
+echo "modules file: " ${modules_file};
+if [ ! -e ${modules_file} ]; then
+    echo "modules file " ${modules_file} " not exists";
+    exit 1;
+fi
+
+build_all="";
+build_clean="";
+build_install="";
+
+while read line
+do
+    no_comment=`echo ${line} | sed -r 's/#.*//g'`;
+    no_space=`echo ${no_comment} | sed -r 's/^[[:space:]]*(.*[^[:space:]])([[:space:]]*)$/\1/g'`;
+    if [ "${no_space}"x != ""x ]; then
+        path=`echo ${no_space} | sed -r 's/\/[^\/]*$//g'`;
+        file=`echo ${no_space} | sed -r 's/.*\///g'`;
+        build_all=${build_all}"\tcd ../src/${path} && make -f ${file}\n";
+        build_clean=${build_clean}"\tcd ../src/${path} && make -f ${file} clean\n";
+        build_install=${build_install}"\tcd ../src/${path} && make -f ${file} install\n";
+#    else
+#        echo "empty line";
+    fi
+done < ${modules_file}
+
+echo "###########################################" > ${MAKEFILE};
+echo "# auto generated makefile, donnot edit it." >> ${MAKEFILE};
+echo "" >> ${MAKEFILE};
+echo "all:" >> ${MAKEFILE};
+echo -e ${build_all} >> ${MAKEFILE};
+echo "clean:" >> ${MAKEFILE};
+echo -e ${build_clean} >> ${MAKEFILE};
+echo "install:" >> ${MAKEFILE};
+echo -e ${build_install} >> ${MAKEFILE};
+
+exit 0;

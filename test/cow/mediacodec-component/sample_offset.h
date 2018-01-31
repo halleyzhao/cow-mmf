@@ -1,0 +1,88 @@
+/**
+ * Copyright (C) 2017 Alibaba Group Holding Limited. All Rights Reserved.
+ *
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+int sampleOffsets[] = {
+0x0,
+0xe,
+0x16,
+0xb55c,
+0x12a72,
+0x19e38,
+0x213d7,
+0x2988f,
+0x31c15,
+0x3ab66,
+0x43857,
+0x4d40c,
+0x56eb7,
+0x61dc4,
+0x6b399,
+0x762c0,
+0x802c3,
+0x8b369,
+0x964af,
+0xa1db7,
+0xac78d,
+0xb8882,
+0xc2f87,
+0xce611,
+0xd7fc5,
+0xe2fe8,
+0xecd93,
+0xf86bc,
+0x1022da,
+0x10e02a,
+0x117d7e,
+0x1234da,
+0x12ccce,
+0x138692,
+0x1423be,
+0x14e1d8,
+0x158554,
+0x165698,
+0x16f52a,
+0x17c8b4,
+0x187320,
+0x1935ca,
+0x19ddac,
+0x1aa884,
+0x1b5629,
+0x1c238c,
+0x1cd0b1,
+0x1d9e1f,
+0x1e492c,
+0x1f0fe4,
+0x1fa8a6,
+0x205f65,
+0x20f185,
+0x21953f,
+0x221a6e,
+0x22c05f,
+0x234cf9,
+0x23ecef,
+0x247f97,
+0x252a6c,
+0x25be94,
+0x2675de,
+0x27153f,
+0x27c9d4,
+0x285ddf,
+0x291120
+
+
+
+};

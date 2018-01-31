@@ -1,0 +1,54 @@
+#!/bin/sh
+if [ "$0" = "bash" ];then
+    MY_SCRIPT="$BASH_SOURCE"
+else
+    MY_SCRIPT="$0"
+fi
+SCRIPTS_PATH=$(cd `dirname $MY_SCRIPT`; pwd)
+echo "using scripts from ${SCRIPTS_PATH}"
+source ${SCRIPTS_PATH}/set_default_install_dir
+
+if [ -n "$1" ]; then
+    export FFMPEG_ROOT_DIR=$1
+else
+    export FFMPEG_ROOT_DIR="${DEFAULT_LOCAL_INSTALL_DIR}/ffmpeg"
+fi
+
+mkdir -p ${FFMPEG_ROOT_DIR}
+ADD_PKG_CONFIG_PATH="${FFMPEG_ROOT_DIR}/lib/pkgconfig/"
+ADD_LD_LIBRARY_PATH="${FFMPEG_ROOT_DIR}/lib/"
+ADD_PATH="${FFMPEG_ROOT_DIR}/bin/"
+
+PLATFORM_ARCH_64=`uname -a | grep x86_64`
+if [ -n "$PKG_CONFIG_PATH" ]; then
+    export PKG_CONFIG_PATH="${ADD_PKG_CONFIG_PATH}:$PKG_CONFIG_PATH"
+elif [ -n "$PLATFORM_ARCH_64" ]; then
+    export PKG_CONFIG_PATH="${ADD_PKG_CONFIG_PATH}:/usr/lib/pkgconfig/:/usr/lib/x86_64-linux-gnu/pkgconfig/"
+else
+    export PKG_CONFIG_PATH="${ADD_PKG_CONFIG_PATH}:/usr/lib/pkgconfig/:/usr/lib/i386-linux-gnu/pkgconfig/"
+fi
+
+export LD_LIBRARY_PATH="${ADD_LD_LIBRARY_PATH}:$LD_LIBRARY_PATH"
+export PATH="${ADD_PATH}:$PATH"
+
+echo "*======================current configuration============================="
+echo "* FFMPEG_ROOT_DIR: ${FFMPEG_ROOT_DIR}"
+echo "* PKG_CONFIG_PATH: ${PKG_CONFIG_PATH}"
+echo "* LD_LIBRARY_PATH: ${LD_LIBRARY_PATH}"
+echo "* PATH           : $PATH"
+echo "*========================================================================="
+export COMMON_CFG="--disable-static --enable-shared --disable-stripping --enable-debug"
+export MIN_FEATURE_SET="
+--disable-version3 --disable-devices --disable-nonfree --disable-gpl --disable-doc --disable-yasm \
+--disable-avdevice --disable-bsfs --disable-filters \
+--disable-protocols \
+--enable-protocol=file --enable-protocol=http --enable-protocol=hls \
+--enable-nonfree --enable-protocol=https --enable-protocol=tls_openssl --enable-openssl \
+--disable-encoders --disable-muxers \
+--disable-parsers --enable-parser=aac --enable-parser=aac_latm --enable-parser=h264 \
+--disable-demuxers --enable-demuxer=aac --enable-demuxer=h264 \
+--disable-decoders --enable-decoder=h264 \
+"
+# echo "* ffmpeg: git clean -dxf && ./configure --prefix=\$FFMPEG_ROOT_DIR \${COMMON_CFG} \${MIN_FEATURE_SET} && make -j 4 && make install"
+echo "* ffmpeg: git clean -dxf && ./configure --prefix=\$FFMPEG_ROOT_DIR \${COMMON_CFG} && make -j 4 && make install"
+source ${SCRIPTS_PATH}/add_term_prompt.sh ffmpeg_make

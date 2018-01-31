@@ -1,0 +1,48 @@
+#!/bin/sh
+if [ "$0" = "bash" ];then
+    MY_SCRIPT="$BASH_SOURCE"
+else
+    MY_SCRIPT="$0"
+fi
+SCRIPTS_PATH=$(cd `dirname $MY_SCRIPT`; pwd)
+echo "using scripts from ${SCRIPTS_PATH}"
+source ${SCRIPTS_PATH}/set_default_install_dir
+
+if [ -n "$1" ]; then
+    export export YAMI_ROOT_DIR=$1
+else
+    export YAMI_ROOT_DIR="${DEFAULT_LOCAL_INSTALL_DIR}/yami"
+fi
+
+mkdir -p ${YAMI_ROOT_DIR}
+export VAAPI_PREFIX="${YAMI_ROOT_DIR}/vaapi"
+export LIBYAMI_PREFIX="${YAMI_ROOT_DIR}/libyami"
+ADD_PKG_CONFIG_PATH="${VAAPI_PREFIX}/lib/pkgconfig/:${LIBYAMI_PREFIX}/lib/pkgconfig/"
+ADD_LD_LIBRARY_PATH="${VAAPI_PREFIX}/lib/:${LIBYAMI_PREFIX}/lib/"
+ADD_PATH="${VAAPI_PREFIX}/bin/:${LIBYAMI_PREFIX}/bin/"
+
+PLATFORM_ARCH_64=`uname -a | grep x86_64`
+if [ -n "$PKG_CONFIG_PATH" ]; then
+    export PKG_CONFIG_PATH="${ADD_PKG_CONFIG_PATH}:$PKG_CONFIG_PATH"
+elif [ -n "$PLATFORM_ARCH_64" ]; then
+    export PKG_CONFIG_PATH="${ADD_PKG_CONFIG_PATH}:/usr/lib/pkgconfig/:/usr/lib/x86_64-linux-gnu/pkgconfig/"
+else
+    export PKG_CONFIG_PATH="${ADD_PKG_CONFIG_PATH}:/usr/lib/pkgconfig/:/usr/lib/i386-linux-gnu/pkgconfig/"
+fi
+
+export LD_LIBRARY_PATH="${ADD_LD_LIBRARY_PATH}:$LD_LIBRARY_PATH"
+
+export PATH="${ADD_PATH}:$PATH"
+
+echo "*======================current configuration============================="
+echo "* VAAPI_PREFIX:               $VAAPI_PREFIX"
+echo "* LIBYAMI_PREFIX:             ${LIBYAMI_PREFIX}"
+echo "* LD_LIBRARY_PATH:            ${LD_LIBRARY_PATH}"
+echo "* PATH:                       $PATH"
+echo "*========================================================================="
+
+echo "* vaapi:      git clean -dxf && ./autogen.sh --prefix=\$VAAPI_PREFIX --disable-glx --disable-egl --disable-wayland && make -j4 && make install"
+echo "* ffmpeg:     git clean -dxf && ./configure --prefix=\$VAAPI_PREFIX && make -j4 && make install"
+echo "* libyami:    git clean -dxf && ./autogen.sh --prefix=\$LIBYAMI_PREFIX --enable-debug --enable-egl --enable-avformat --enable-tests --enable-tests-gles --enable-x11 --enable-v4l2=yes --enable-v4l2-ops=yes --disable-h265dec && make -j4 && make install"
+# echo "* libyami:    git clean -dxf && ./autogen.sh --prefix=\$LIBYAMI_PREFIX --enable-tests --enable-tests-gles && make -j4 && make install"
+source ${SCRIPTS_PATH}/add_term_prompt.sh yami_make

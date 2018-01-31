@@ -1,0 +1,183 @@
+<?xml version="1.0"?>
+<!--
+Copyright (C) 2017 Alibaba Group Holding Limited. All Rights Reserved.
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!--  low=0,normal=256,HIGH=512  -->
+<Components>
+    <Path libpath="/usr/lib/cow/"/>
+    <Component libComponentName="MediaCodecComponent" ComponentName="MediaCodec">
+        <mime MimeType="video/x-vnd.on2.vp8" Priority="normal" Cap="decoder"/>
+        <mime MimeType="video/x-vnd.on2.vp9" Priority="normal" Cap="decoder"/>
+        <mime MimeType="video/avc" Priority="normal" Cap="codec"/>
+        <mime MimeType="video/hevc" Priority="normal" Cap="decoder"/>
+        <mime MimeType="video/mp4v-es" Priority="normal" Cap="decoder"/>
+        <mime MimeType="video/3gpp" Priority="normal" Cap="decoder"/>
+        <mime MimeType="video/mpeg2" Priority="normal" Cap="decoder"/>
+        <mime MimeType="audio/amr" Priority="normal" Cap="codec"/>
+        <mime MimeType="audio/amr-wb" Priority="normal" Cap="codec"/>
+        <mime MimeType="audio/mpeg" Priority="normal" Cap="decoder"/>
+        <mime MimeType="audio/mpeg-L1" Priority="normal" Cap="decoder"/>
+        <mime MimeType="audio/mpeg-L2" Priority="normal" Cap="decoder"/>
+        <mime MimeType="audio/mp4a-latm" Priority="normal" Cap="codec"/>
+        <mime MimeType="audio/vorbis" Priority="normal" Cap="codec"/>
+        <mime MimeType="audio/g711-alaw" Priority="normal" Cap="decoder"/>
+        <mime MimeType="audio/g711-mlaw" Priority="normal" Cap="decoder"/>
+        <mime MimeType="audio/flac" Priority="normal" Cap="encoder"/>
+        <mime MimeType="audio/aac-adts" Priority="normal" Cap="decoder"/>
+        <!-- mime MimeType="audio/ac3" Priority="normal" Cap="decoder"/-->
+        <!--mime MimeType="audio/eac3" Priority="normal" Cap="decoder"/-->
+        <mime MimeType="audio/wma" Priority="normal" Cap="decoder"/>
+        <mime MimeType="audio/raw" Priority="normal" Cap="decoder"/>
+        <mime MimeType="audio/wmapro" Priority="normal" Cap="decoder"/>
+        <mime MimeType="audio/mp4" Priority="normal" Cap="decoder"/>
+    </Component>
+    <Component libComponentName="FFmpegComponent" ComponentName="FFmpeg">
+        <mime MimeType="audio/amr" Priority="high" Cap="decoder"/>
+        <mime MimeType="audio/amr-wb" Priority="high" Cap="decoder"/>
+        <mime MimeType="audio/mp2" Priority="high" Cap="codec"/>
+        <mime MimeType="audio/mp3" Priority="high" Cap="codec"/>
+        <mime MimeType="audio/mpeg" Priority="low" Cap="decoder"/>
+        <mime MimeType="audio/mpeg-adu" Priority="low" Cap="decoder"/>
+        <mime MimeType="audio/mpeg-on4" Priority="low" Cap="decoder"/>
+        <mime MimeType="audio/mpeg-L1" Priority="high" Cap="decoder"/>
+        <mime MimeType="audio/mpeg-L2" Priority="high" Cap="decoder"/>
+        <mime MimeType="audio/mp4a-latm" Priority="high" Cap="decoder"/>
+        <mime MimeType="audio/mp4a-latm" Priority="low" Cap="encoder"/>
+        <mime MimeType="audio/qcelp" Priority="high" Cap="codec"/>
+        <mime MimeType="audio/vorbis" Priority="high" Cap="codec"/>
+        <mime MimeType="audio/wav" Priority="high" Cap="codec"/>
+        <mime MimeType="audio/g711-alaw" Priority="high" Cap="codec"/>
+        <mime MimeType="audio/g711-mlaw" Priority="high" Cap="decoder"/>
+        <mime MimeType="audio/flac" Priority="low" Cap="codec"/>
+        <mime MimeType="audio/aac-adts" Priority="high" Cap="codec"/>
+        <mime MimeType="audio/gsm" Priority="high" Cap="codec"/>
+        <!-- mime MimeType="audio/ac3" Priority="high" Cap="codec"/ -->
+        <!-- mime MimeType="audio/eac3" Priority="high" Cap="codec"/ -->
+        <mime MimeType="audio/wma" Priority="high" Cap="codec"/>
+        <mime MimeType="audio/raw" Priority="low" Cap="codec"/>
+        <mime MimeType="audio/wmapro" Priority="high" Cap="codec"/>
+        <mime MimeType="audio/wmalossless" Priority="high" Cap="codec"/>
+        <mime MimeType="audio/opus" Priority="high" Cap="decoder"/>
+        <mime MimeType="audio/wmv" Priority="high" Cap="codec"/>
+        <mime MimeType="video/avc" Priority="low" Cap="decoder"/>
+        <mime MimeType="video/wmv" Priority="low" Cap="decoder"/>
+        <mime MimeType="video/wmv1" Priority="low" Cap="decoder"/>
+        <mime MimeType="video/wmv2" Priority="low" Cap="decoder"/>
+        <mime MimeType="video/wmv3" Priority="low" Cap="decoder"/>
+        <mime MimeType="video/asf" Priority="normal" Cap="decoder"/>
+        <mime MimeType="video/mp4v-es" Priority="low" Cap="decoder"/>
+        <mime MimeType="video/mp4v-es-v1" Priority="low" Cap="decoder"/>
+        <mime MimeType="video/mp4v-es-v2" Priority="low" Cap="decoder"/>
+        <mime MimeType="video/mp4v-es-v3" Priority="low" Cap="decoder"/>
+        <mime MimeType="video/mp4v-es" Priority="low" Cap="encoder"/>
+        <mime MimeType="video/mp4v-es-v1" Priority="low" Cap="encoder"/>
+        <mime MimeType="video/mp4v-es-v2" Priority="low" Cap="encoder"/>
+        <mime MimeType="video/mp4v-es-v3" Priority="low" Cap="encoder"/>
+        <mime MimeType="video/h263" Priority="low" Cap="codec"/>
+        <mime MimeType="video/h263i" Priority="low" Cap="decoder"/>
+        <mime MimeType="video/h263p" Priority="low" Cap="encoder"/>
+        <mime MimeType="video/mpegvideo" Priority="low" Cap="decoder"/>
+        <mime MimeType="video/vc1" Priority="low" Cap="decoder"/>
+        <mime MimeType="video/flv" Priority="low" Cap="decoder"/>
+        <mime MimeType="video/bmp" Priority="low" Cap="decoder"/>
+        <mime MimeType="video/tiff" Priority="low" Cap="decoder"/>
+        <mime MimeType="video/theora" Priority="low" Cap="decoder"/>
+    </Component>
+    <Component libComponentName="AudioCodecOpus" ComponentName="AudioCodecOpus">
+        <mime MimeType="audio/opus" Priority="high" Cap="encoder"/>
+    </Component>
+    <Component libComponentName="VideoSinkBasic" ComponentName="VideoSinkBasic">
+        <mime MimeType="video/render" Priority="low" Cap="generic"/>
+    </Component>
+    <Component libComponentName="VideoSinkSurface" ComponentName="VideoSinkSurface">
+        <mime MimeType="video/render" Priority="normal" Cap="generic"/>
+    </Component>
+    <Component libComponentName="AVDemuxer" ComponentName="AVDemuxer">
+        <mime MimeType="media/demuxer" Priority="normal" Cap="generic"/>
+    </Component>
+    <Component libComponentName="RtpDemuxer" ComponentName="RtpDemuxer">
+        <mime MimeType="media/rtp-demuxer" Priority="normal" Cap="generic"/>
+    </Component>
+    <Component libComponentName="AVMuxer" ComponentName="AVMuxer">
+        <mime MimeType="media/muxer" Priority="normal" Cap="generic"/>
+    </Component>
+    <Component libComponentName="CameraSource" ComponentName="CameraSource">
+        <mime MimeType="video/source" Priority="normal" Cap="generic"/>
+    </Component>
+    <Component libComponentName="VideoFilterExample" ComponentName="VideoFilterExample">
+        <mime MimeType="video/filter-example" Priority="normal" Cap="generic"/>
+    </Component>
+    <Component libComponentName="AudioSrcFile" ComponentName="AudioSrcFile">
+        <mime MimeType="audio/file-source" Priority="normal" Cap="generic"/>
+    </Component>
+    <Component libComponentName="VideoTestSource" ComponentName="VideoTestSource">
+        <mime MimeType="video/test-source" Priority="normal" Cap="generic"/>
+    </Component>
+    <Component libComponentName="FakeSink" ComponentName="FakeSink">
+        <mime MimeType="audio/render" Priority="low" Cap="generic"/>
+        <mime MimeType="video/render" Priority="low" Cap="generic"/>
+    </Component>
+    <Component libComponentName="FileSink" ComponentName="FileSink">
+        <mime MimeType="media/file-sink" Priority="normal" Cap="generic"/>
+    </Component>
+    <Component libComponentName="SubtitleSink" ComponentName="SubtitleSink">
+        <mime MimeType="subtitle/sink" Priority="normal" Cap="generic"/>
+    </Component>
+   <Component libComponentName="VideoSourceFile" ComponentName="VideoSourceFile">
+        <mime MimeType="video/file-source" Priority="low" Cap="generic"/>
+    </Component>
+    <Component libComponentName="SubtitleSource" ComponentName="SubtitleSource">
+        <mime MimeType="subtitle/source" Priority="normal" Cap="generic"/>
+    </Component>
+   <Component libComponentName="JpegEncoder" ComponentName="JpegEncoder">
+        <mime MimeType="image/jpeg" Priority="normal" Cap="encoder"/>
+    </Component>
+    <Component libComponentName="AudioSinkCras" ComponentName="AudioSinkCras">
+        <mime MimeType="audio/render" Priority="high" Cap="generic"/>
+    </Component>
+    <Component libComponentName="AudioSinkLPA" ComponentName="AudioSinkLPA">
+        <mime MimeType="audio/render" Priority="low" Cap="generic"/>
+    </Component>
+    <Component libComponentName="AudioSrcCras" ComponentName="AudioSrcCras">
+        <mime MimeType="audio/source" Priority="high" Cap="generic"/>
+    </Component>
+    <Component libComponentName="RtpMuxer" ComponentName="RtpMuxer">
+    <mime MimeType="media/rtp-muxer" Priority="normal" Cap="generic"/>
+    </Component>
+    <Component libComponentName="MediaFission" ComponentName="MediaFission">
+        <mime MimeType="media/all" Priority="normal" Cap="generic"/>
+    </Component>
+    <Component libComponentName="VideoSourceSurface" ComponentName="VideoSourceSurface">
+        <mime MimeType="video/wfd-source" Priority="normal" Cap="generic"/>
+        <mime MimeType="video/screen-source" Priority="normal" Cap="generic"/>
+        <mime MimeType="video/surface-source" Priority="normal" Cap="generic"/>
+    </Component>
+    <Component libComponentName="ImageSourceCamera" ComponentName="ImageSourceCamera">
+        <mime MimeType="image/camera-source" Priority="normal" Cap="generic"/>
+    </Component>
+    <Component libComponentName="VideoSourceCamera" ComponentName="VideoSourceCamera">
+        <mime MimeType="video/camera-source" Priority="normal" Cap="generic"/>
+    </Component>
+    <Component libComponentName="SegExtractor" ComponentName="SegExtractor">
+        <mime MimeType="application/dash+xml" Priority="normal" Cap="generic"/>
+    </Component>
+    <Component libComponentName="APPSink" ComponentName="APPSink">
+        <mime MimeType="media/app-sink" Priority="low" Cap="generic"/>
+    </Component>
+    <Component libComponentName="APPPlaySource" ComponentName="APPPlaySource">
+        <mime MimeType="media/app-source" Priority="low" Cap="generic"/>
+    </Component>
+
+</Components>

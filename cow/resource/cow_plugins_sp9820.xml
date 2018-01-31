@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!--
+Copyright (C) 2017 Alibaba Group Holding Limited. All Rights Reserved.
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!--  low=0,normal=256,HIGH=512  -->
+
+<Components>
+    <!-- disable sw codec from mediacodec -->
+    <Path libpath="/usr/lib/cow/"/>
+    <Component libComponentName="MediaCodecComponent" ComponentName="MediaCodec">
+        <mime MimeType="audio/amr" Priority="disable" Cap="codec"/>
+        <mime MimeType="audio/amr-wb" Priority="disable" Cap="codec"/>
+        <mime MimeType="audio/mpeg" Priority="disable" Cap="decoder"/>
+        <mime MimeType="audio/mpeg-L1" Priority="disable" Cap="decoder"/>
+        <mime MimeType="audio/mpeg-L2" Priority="disable" Cap="decoder"/>
+        <mime MimeType="audio/mp4a-latm" Priority="disable" Cap="codec"/>
+        <mime MimeType="audio/vorbis" Priority="disable" Cap="codec"/>
+        <mime MimeType="audio/g711-alaw" Priority="disable" Cap="decoder"/>
+        <mime MimeType="audio/g711-mlaw" Priority="disable" Cap="decoder"/>
+        <mime MimeType="audio/flac" Priority="disable" Cap="encoder"/>
+        <mime MimeType="audio/aac-adts" Priority="disable" Cap="decoder"/>
+        <mime MimeType="audio/ac3" Priority="disable" Cap="decoder"/>
+        <mime MimeType="audio/eac3" Priority="disable" Cap="decoder"/>
+        <mime MimeType="audio/wma" Priority="disable" Cap="decoder"/>
+        <mime MimeType="audio/raw" Priority="disable" Cap="decoder"/>
+        <mime MimeType="audio/wmapro" Priority="disable" Cap="decoder"/>
+        <mime MimeType="audio/mp4" Priority="disable" Cap="decoder"/>
+    </Component>
+
+    <Path libpath="/usr/lib/cow/"/>
+    <Component libComponentName="FFmpegComponent" ComponentName="FFmpeg">
+        <mime MimeType="audio/mp4a-latm" Priority="high" Cap="encoder"/>
+        <mime MimeType="video/mpeg1" Priority="high" Cap="decoder"/>
+        <mime MimeType="video/mpeg2" Priority="high" Cap="decoder"/>
+        <mime MimeType="video/mpeg2-xvmc" Priority="high" Cap="decoder"/>
+        <mime MimeType="video/3gpp" Priority="high" Cap="decoder"/>
+    </Component>
+</Components>

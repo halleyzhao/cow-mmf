@@ -1,0 +1,12 @@
+#!/bin/bash
+
+file=$1;
+listfile=$2;
+a="";
+if [ -e ${listfile} ]; then
+    a=`grep -x "${file}" ${listfile}`;
+fi
+
+if [ "${a}"x = ""x ]; then
+    echo ${file} >> ${listfile};
+fi

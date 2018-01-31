@@ -1,0 +1,65 @@
+#!/bin/bash
+
+dst_base=""
+
+do_copy()
+{
+    src=$1;
+    dst=$2;
+    dst_path_only=`echo ${dst} | sed -r 's/\/[^\/]*$//g'`;
+    dst_path=${dst_base}/${dst_path_only};
+    if [ ! -d ${dst_path} ]; then
+        mkdir -p ${dst_path};
+        if [ ! -d ${dst_path} ]; then
+            echo "failed to create dir: " ${dst_path};
+            exit 1;
+        fi
+    fi
+    if [ -e ${src} ]; then
+        echo "installing " ${src} to ${dst_base}/${dst};
+        cp -f ${src} ${dst_base}/${dst};
+        return;
+    fi
+    echo ${src} ": file or path not exists";
+    exit 1;
+}
+
+src=$1;
+if [ "${src}"x = ""x ]; then
+    exit 0;
+fi
+
+dst_base=$2;
+if [ "${dst_base}"x = ""x ]; then
+    return 0;
+fi
+
+base_build_dir=$3;
+if [ "${base_build_dir}"x = ""x ]; then
+    return 0;
+fi
+
+eng_list_file=$4;
+if [ "${eng_list_file}"x = ""x ]; then
+    return 0;
+fi
+
+to_copy_array=`echo ${src} | sed 's/(\|)/ /g'`;
+# echo ${to_copy_array};
+for every in ${to_copy_array}; do
+    file_mode=`echo ${every} | sed 's/\(.*\):\(.*\):\(.*\)/\1/g'`;
+    src=`echo ${every} | sed 's/\(.*\):\(.*\):\(.*\)/\2/g'`;
+    dst=`echo ${every} | sed 's/.*://g'`;
+    if [ "${file_mode}"x != "usr"x -a "${file_mode}"x != "eng"x ]; then
+        echo "invalid params: " ${every};
+        exit 1;
+    fi
+    do_copy ${src} ${dst};
+
+    if [ "${file_mode}"x != "usr"x ]; then
+        ${base_build_dir}/insert_eng_only ${dst} ${eng_list_file} 
+    fi;
+done
+
+exit 0;
+

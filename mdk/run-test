@@ -1,0 +1,10 @@
+#!/bin/sh
+export MDK_PATH=`pwd`
+export PATH="${MDK_PATH}/fakeroot/usr/bin:"${PATH}
+export LD_LIBRARY_PATH="${MDK_PATH}/fakeroot/usr/lib:"${LD_LIBRARY_PATH}
+## add ffmpeg lib for your environments
+# export LD_LIBRARY_PATH="/home/halley//local_install/multimedia//usr/lib:/home/halley//local_install/ffmpeg/lib/:${LD_LIBRARY_PATH}"
+export COW_XML_PATH=${MDK_PATH}/fakeroot/usr/lib/cow/
+# cowplayer-test -a /path/to/h264/mp4
+examplepipeline-test ./res/h264.h264
+

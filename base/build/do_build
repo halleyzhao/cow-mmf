@@ -1,0 +1,94 @@
+
+BUILD_OBJS= $(patsubst %, %.o, $(basename $(LOCAL_SRC_FILES)))
+
+HASCXX := $(strip $(filter-out  %.c , ${LOCAL_SRC_FILES}))
+ifdef HASCXX
+    CC := $(CXX)
+endif
+
+CPPFLAGS+= -Wall -Wno-unused-parameter
+
+ifneq ($(LOCAL_INCLUDES),)
+    the_includes := $(foreach n, $(LOCAL_INCLUDES), -I$(n))
+    CPPFLAGS += $(the_includes)
+endif
+
+CPPFLAGS += $(MM_DEFINES)
+CPPFLAGS += $(LOCAL_DEFINES)
+
+LDFLAGS += -L$(OUT_LIB_PATH)
+LDFLAGS += -Wl,--rpath-link=$(OUT_LIB_PATH)
+
+LDFLAGS += -L$(INST_BASE_PATH)/$(INST_LIB_PATH)
+LDFLAGS += -Wl,--rpath-link=$(INST_BASE_PATH)/$(INST_LIB_PATH)
+
+ifneq ($(LOCAL_SHARED_LIBRARIES),)
+    the_libs := $(foreach n, $(LOCAL_SHARED_LIBRARIES), -l$(n))
+    LDFLAGS += $(the_libs)
+endif
+
+ifneq ($(LOCAL_STATIC_LIBRARIES),)
+    the_libs := $(foreach n, $(LOCAL_STATIC_LIBRARIES), -l$(n))
+    LDFLAGS += $(the_libs)
+endif
+
+ifneq ($(MM_LIBS),)
+    LDFLAGS += $(MM_LIBS)
+endif
+
+ifneq ($(LOCAL_LIB_PATHS),)
+    the_libpaths := $(foreach n, $(LOCAL_LIB_PATHS), -L$(n))
+    LDFLAGS += $(the_libpaths)
+    the_rpath_links := $(foreach n, $(LOCAL_LIB_PATHS), -Wl,--rpath-link=$(n))
+    LDFLAGS += $(the_rpath_links)
+endif
+
+ifneq ($(LOCAL_RPATH),)
+    LDFLAGS += -Wl,-rpath=$(LOCAL_RPATH)
+endif
+
+ifneq ($(LOCAL_CFLAGS),)
+    CFLAGS += $(LOCAL_CFLAGS)
+endif
+
+ifneq ($(LOCAL_CPPFLAGS),)
+    CFLAGS += $(LOCAL_CPPFLAGS)
+endif
+
+ifneq ($(LOCAL_LDFLAGS),)
+    LDFLAGS += $(LOCAL_LDFLAGS)
+endif
+
+%.o: %.c
+	$(CC) -c $(CFLAGS) $(CPPFLAGS) $< -o $@
+
+%.o: %.cc
+	$(CC) -c $(CFLAGS) $(CPPFLAGS) $< -o $@
+
+%.o: %.cpp
+	$(CC) -c $(CFLAGS) $(CPPFLAGS) $< -o $@
+
+.PHONY: clean
+
+all: $(LOCAL_MODULE)
+
+$(LOCAL_MODULE): $(BUILD_OBJS)
+	@if [ "$(MODULE_TYPE)"x != "usr"x -a "$(MODULE_TYPE)"x != "eng"x ]; then \
+            echo "ERROR: Please define MODULE_TYPE to eng or usr in your makefile.";\
+            exit 1;\
+        fi;
+	@(test -d $(OUT_PATH) || mkdir -p $(OUT_PATH))
+	$(CC) $(BUILD_OBJS) -o $(OUT_PATH)/$@ $(LDFLAGS)
+
+clean:
+	rm -f $(BUILD_OBJS)
+	rm -f $(OUT_PATH)/$(LOCAL_MODULE)
+	rm -f $(OUT_ENG_ONLY_FILE)
+
+install: $(OUT_PATH)/$(LOCAL_MODULE)
+	test -d $(INSTALL_PATH) || mkdir -p $(INSTALL_PATH)
+	install -m 755  $(OUT_PATH)/$(LOCAL_MODULE) -D $(INSTALL_PATH)/$(LOCAL_MODULE)
+	@/bin/sh $(BASE_BUILD_DIR)/install_other "$(LOCAL_INST_FILES)" "$(INST_BASE_PATH)" "$(BASE_BUILD_DIR)" "$(OUT_ENG_ONLY_FILE)"
+	@if [ "$(MODULE_TYPE)"x != "usr"x ]; then \
+	    /bin/sh $(BASE_BUILD_DIR)/insert_eng_only $(OUT_RELATIVE_PATH)/$(LOCAL_MODULE) $(OUT_ENG_ONLY_FILE);\
+        fi
